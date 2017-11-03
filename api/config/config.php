@@ -1,18 +1,30 @@
 <?php
 
- $GLOBALS['config'] = [
-        'HOST'      => '',
-        'PORT'      => '',
-        'USER'      => '',
-        'PASS'      => '',
-        'DB'        => ''
-];
+class Config
+{
+    /**
+     * @var array
+     */
+    private $values;
 
-// Absolute path for the project if there's a server host.
-if(!defined('SER_ABSPATH'))
-    define('SER_ABSPATH',$_SERVER['DOCUMENT_ROOT']."/");
+    /**
+     * Constructor.
+     *
+     * @param array $values
+     */
+    public function __construct($values)
+    {
+        $this->values = $values;
+    }
 
-//Absolute path for the project if there's no server host.
-if(!defined('ABSPATH'))
-    define('ABSPATH',dirname(__DIR__));
-
+    /**
+     * Get configuration value by key.
+     *
+     * @param string $key
+     * @return mixed
+     */
+    public function get($key)
+    {
+        return $this->values[$key];
+    }
+}
